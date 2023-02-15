@@ -1,0 +1,25 @@
+<div>
+  <h1 class="tittle">Chat App</h1>
+  <div class="signin-container">
+    <form [formGroup]="signUpForm" (ngSubmit)="submit()">
+      <h1>Sign Up</h1>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input class="inputs" type="email" id="email" placeholder="Enter email" formControlName="emailId">
+      </div>
+      <div class="form-group">
+        <label for="username">Username:</label>
+        <input class="inputs" type="text" id="username" placeholder="Enter username" formControlName="userName">
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input class="inputs" type="password" id="password" placeholder="Enter password" formControlName="password">
+      </div>
+      <button class="submit" type="submit">Submit</button>
+    </form>
+  </div>
+  <nav id="navigation"  class="d-flex justify-content-center mt-4">
+    <a routerLink = "/LogIn" class="col-5"><button class="btn btn-primary col-12">Log In</button></a>
+  </nav>
+  <router-outlet></router-outlet>
+</div>
