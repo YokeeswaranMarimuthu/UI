@@ -1,0 +1,21 @@
+<div class="chat-container">
+    <div class="header">
+        <h1>userName</h1>
+    </div>
+    <div class="chat-window" #scrollMe>
+        <ul class="message-list" *ngFor="let message of messages">
+            <li class="message received" [ngClass]="{'received': message.type === 'received','sent': message.type === 'sent'}">
+                <div class="message-text">
+                    <p class="username">User 1:</p>
+                    <p>{{message.content}}</p>
+                </div>
+            </li>
+        </ul>
+    </div>
+    
+    <div class="input-group">
+        <div *ngIf="active" class="input-message">{{typess}}</div>
+        <input type="text" [placeholder]="placeHolder" [(ngModel)]="typed">
+        <button type="submit" (click)="activeate()" [ngClass]="{'active': active}"><i class="bi bi-send-fill"></i></button>
+    </div>
+</div>

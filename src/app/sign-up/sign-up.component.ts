@@ -12,7 +12,11 @@ import { ServicesService } from '../services/services.service';
 export class SignUpComponent {
   data: any;
 
-  constructor(public api:ServicesService, private router:Router){}
+  constructor(public api:ServicesService, private router:Router){
+    if(localStorage.getItem('accessToken')){
+      this.router.navigate(['/Chats'])
+    }
+  }
   
   signUpForm = new FormGroup({
     emailId : new FormControl(),
@@ -29,8 +33,9 @@ export class SignUpComponent {
     this.signUpForm.reset();
     this.api.signUpUser(details).subscribe({
       next:(res)=>{
-        if(res.status===200){
-          this.router.navigate(['/LogIn'])
+        if(res.status === 200 && res.message === 'success'){
+          localStorage.setItem('accessToken', JSON.stringify(res.accessToken));
+          this.router.navigate(['/Chats'])
           this.data=res.actualData
         }
         else{

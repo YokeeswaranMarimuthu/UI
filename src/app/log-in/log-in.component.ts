@@ -10,9 +10,19 @@ import { ServicesService } from '../services/services.service';
 })
 export class LogInComponent {
   data: any;
+  options = [
+    { value: 'option1', label: 'Option 1' },
+    { value: 'option2', label: 'Option 2' },
+    { value: 'option3', label: 'Option 3' }
+  ];
+  selectedOption: string;
+  constructor(public api:ServicesService, private router:Router){
 
-  constructor(public api:ServicesService, private router:Router){}
-  
+    if(localStorage.getItem('accessToken')){
+      this.router.navigate(['/Chats'])
+    }
+  }
+
   logInForm = new FormGroup({
     emailId : new FormControl(),
     password : new FormControl(),
@@ -25,7 +35,9 @@ export class LogInComponent {
     this.logInForm.reset();
     this.api.signInUser(details).subscribe({
       next:(res)=>{
-        if(res.status===200){
+        if(res.status===200 && res.message === 'success'){
+          localStorage.setItem('accessToken', JSON.stringify(res.accessToken));
+          this.router.navigate(['/Chats'])
           this.data=res.actualData
         }
         else{

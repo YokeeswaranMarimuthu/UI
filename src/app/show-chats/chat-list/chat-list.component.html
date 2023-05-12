@@ -1,0 +1,17 @@
+<div>
+    <div class="inner-container1">
+        <div class="tittle">
+            <h1>Chat App</h1>
+        </div>
+        <div class="list-wrap">
+            <div class="list" *ngFor="let item of contacts" (click)="selectItem(item)">
+                <div class="info">
+                    <span class="user">{{item}}</span>
+                    <span class="text">Hi!</span>
+                </div>
+                <span class="count">20</span>
+                <span class="time">now</span>
+            </div>
+        </div>
+    </div>
+</div>
