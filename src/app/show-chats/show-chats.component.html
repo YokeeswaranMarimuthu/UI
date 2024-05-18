@@ -2,7 +2,10 @@
     <div class="chat-list">
         <app-chat-list></app-chat-list>
     </div>
-    <div class="message-list">
+    <div *ngIf="socketService.room" class="message-list">
         <app-show-message></app-show-message>
+    </div>
+    <div *ngIf="!socketService.room" class="message-list">
+        <div>Currently You No Chat</div>
     </div>
 </div>

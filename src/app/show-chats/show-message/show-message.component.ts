@@ -1,37 +1,20 @@
-import { AfterViewChecked, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewChecked, Component, ElementRef, ViewChild } from '@angular/core';
+import { SocketService } from 'src/app/services/socket.service'; 
 
 @Component({
   selector: 'app-show-message',
   templateUrl: './show-message.component.html',
   styleUrls: ['./show-message.component.scss']
 })
-export class ShowMessageComponent  implements OnInit, AfterViewChecked{
+export class ShowMessageComponent  implements AfterViewChecked{
   @ViewChild("scrollMe") el: ElementRef<HTMLDivElement>;
-  messages: any;
   typed:any;
   typess:any;
   active:boolean = false
   placeHolder ="Type a message..."
 
-  constructor(){}
-  
-  ngOnInit(){
-    this.messages = [{type:'received',content:'Hello! How are you doing today?'},
-    {type:'sent',content:'I am doing well, thank you for asking! How about you?'},
-    {type:'received',content:'I am doing great! So, whats new with you?'},
-    {type:'received',content:'Im doing great! So, whats new with you?'},
-    {type:'sent',content:'ddgd'},
-    {type:'sent',content:'gerge'},
-    {type:'received',content:'Hello! How are you doing today?'},
-    {type:'sent',content:'I am doing well, thank you for asking! How about you?'},
-    {type:'received',content:'I am doing great! So, whats new with you?'},
-    {type:'received',content:'Im doing great! So, whats new with you?'},
-    {type:'sent',content:'ddgd'},
-    {type:'sent',content:'gerge'}]
-  }
+  constructor(public socketService: SocketService){}
 
-
-  
   ngAfterViewChecked() {
     this.scrollToBottom();
   }
@@ -41,13 +24,11 @@ export class ShowMessageComponent  implements OnInit, AfterViewChecked{
   }
 
   activeate(){
-    this.messages.push({type:'sent',content:this.typed})
+    this.socketService.emitToRoom(this.socketService.room, 'message', this.typed);
+    this.socketService.messages.push({type:'sent',content: this.typed})
     this.typess = this.typed
     this.typed = ''
     this.active = true;
-    setTimeout(() => {
-      this.active = false;
-    },2000)
   }
   
 }

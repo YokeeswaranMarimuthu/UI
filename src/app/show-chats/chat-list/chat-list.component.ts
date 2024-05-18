@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ServicesService } from 'src/app/services/services.service';
+import { SocketService } from 'src/app/services/socket.service';
 
 @Component({
   selector: 'app-chat-list',
@@ -7,9 +9,32 @@ import { Component } from '@angular/core';
 })
 export class ChatListComponent {
 
-  contacts:any = ['user1','user2','user3','user4','user5','user6','user7','user1','user2','user3','user4','user5','user6','user7']
-  slected:any;
-  selectItem(chat:any){
-    this.slected = chat
+  chats:any = [];
+
+  constructor(public api:ServicesService, public socketService: SocketService){
+    this.api.getUserDetails().subscribe((res) => {
+      if(res.status===200 && res.message === 'success'){
+        this.chats = res.actualData;
+        this.socketService.room = JSON.stringify(res.actualData[0].chatId);
+      } else {
+        this.socketService.room = '';
+      }
+    })
+  }
+
+  selectItem(chatId:number){
+    this.socketService.room = JSON.stringify(chatId);
+    this.socketService.joinRoom(this.socketService.room);
+    this.getMessage(this.socketService.room);
+  }
+
+  getMessage(chatId: string){
+    this.api.getChatMessages({chatId: +chatId}).subscribe((res) => {
+      if(res.status===200 && res.message === 'success'){
+        this.socketService.messages = res.actualData;
+      } else {
+        this.socketService.messages = [];
+      }
+    })
   }
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ServicesService } from '../services/services.service';
+import { SocketService } from '../services/socket.service';
 
 @Component({
   selector: 'app-show-chats',
@@ -8,17 +8,6 @@ import { ServicesService } from '../services/services.service';
 })
 export class ShowChatsComponent{
 
-  message:any;
-  userName:any;
-
-  constructor(public api:ServicesService){
-
-    this.api.getUserDetails().subscribe((res) => {
-      if(res.status===200 && res.message === 'success'){
-        this.userName = res.actualData
-      }
-    })
-  }
-
+  constructor(public socketService: SocketService){}
 
 }

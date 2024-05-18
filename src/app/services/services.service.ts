@@ -20,6 +20,10 @@ export class ServicesService {
     return this.http.get<any>("http://localhost:5000/api/chatDetails");
   }
 
+  getChatMessages(data: any){
+    return this.http.post<any>("http://localhost:5000/api/chatMessages", data);
+  }
+
   logout() {
     localStorage.removeItem('accessToken');
 }
