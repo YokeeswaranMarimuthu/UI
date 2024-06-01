@@ -1,10 +1,20 @@
-.inner-container1{
-}
-
 .tittle{
     background-color: rgb(222, 240, 189);
     color: dodgerblue;
     text-align: center;
+    .user-info{
+      display: flex;
+      background-color: rgb(189, 240, 193);
+      align-items: center;
+      gap: 10px;
+      line-height: 1;
+      padding: 10px;
+      img{
+        border-radius: 50%;
+        width: auto;
+        height: 30px;
+      }
+    }
 }
 
 .contact{
@@ -15,7 +25,6 @@
   width: 100%;
   overflow: auto;
   height: calc(100vh - 40px);
-  //list
   .list {
     border-bottom: 1px solid #ccc;
     background: #fff;
@@ -24,8 +33,11 @@
     padding: 5px;
     height: 70px;
     cursor: pointer;
-    &:hover, &.active {
-      background: #F4F7F9;
+    &.active {
+      background: #b3d8f1;
+    }
+    &:hover{
+      background: #b3e3f1;
     }
     img {
       border-radius: 50%;

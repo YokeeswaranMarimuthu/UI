@@ -1,0 +1,9 @@
+{
+  "projects": {
+    "default": "chat-app-4333r",
+    "aa": "chat-app-4333r"
+  },
+  "targets": {},
+  "etags": {},
+  "dataconnectEmulatorConfig": {}
+}

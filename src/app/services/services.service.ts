@@ -24,6 +24,10 @@ export class ServicesService {
     return this.http.post<any>("http://localhost:5000/api/chatMessages", data);
   }
 
+  sendMessage(data: any){
+    return this.http.post<any>("http://localhost:5000/api/sendMessage", data);
+  }
+
   logout() {
     localStorage.removeItem('accessToken');
 }

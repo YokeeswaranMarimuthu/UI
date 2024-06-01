@@ -1,6 +1,6 @@
 <div class="chat-container">
     <div class="header">
-        <h1>userName</h1>
+        <h1 *ngIf="socketService?.selectedChat?.chatName">{{socketService.selectedChat.chatName}}</h1>
     </div>
     <div class="chat-window" #scrollMe>
         <ul class="message-list" *ngFor="let message of socketService.messages">

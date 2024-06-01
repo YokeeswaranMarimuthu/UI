@@ -36,7 +36,8 @@ export class LogInComponent {
     this.api.signInUser(details).subscribe({
       next:(res)=>{
         if(res.status===200 && res.message === 'success'){
-          localStorage.setItem('accessToken', JSON.stringify(res.accessToken));
+          localStorage.setItem('accessToken', JSON.stringify(res.actualData.accessToken));
+          localStorage.setItem('userDetails', JSON.stringify(res.actualData.userDetails));
           this.router.navigate(['/Chats'])
           this.data=res.actualData
         }

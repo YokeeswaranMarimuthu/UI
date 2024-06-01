@@ -1,10 +1,14 @@
 <div>
     <div class="inner-container1">
         <div class="tittle">
+            <div class="user-info">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSLU5_eUUGBfxfxRd4IquPiEwLbt4E_6RYMw&s">
+                <h1 *ngIf="socketService?.userDetails?.userName">{{socketService.userDetails.userName}}</h1>
+            </div>
             <h1>Chat App</h1>
         </div>
         <div class="list-wrap">
-            <div class="list" *ngFor="let item of chats" (click)="selectItem(item.chatId)">
+            <div class="list" *ngFor="let item of chats" (click)="selectItem(item)" [ngClass]="{'active': item.chatId === socketService.selectedChat.chatId}">
                 <div class="info">
                     <span class="user">{{item.chatName}}</span>
                     <span class="text">Hi!</span>
